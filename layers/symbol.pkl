@@ -1,0 +1,9 @@
+open module symbol
+extends "layer.pkl"
+
+type = "symbol"
+layout {
+    `text-font` {
+        "NotoSansJP-Regular"
+    }
+}

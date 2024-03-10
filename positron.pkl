@@ -1,3 +1,7 @@
+import "layers/layer.pkl"
+import "layers/symbol.pkl"
+import "layers/fill.pkl"
+
 version = 8
 sources {
   openmaptiles {
@@ -10,36 +14,23 @@ sources {
   }
 }
 sprite = "https://openmaptiles.github.io/positron-gl-style/sprite"
-glyphs = "https://tile.openstreetmap.jp/fonts/{fontstack}/{range}.pbf"
+glyphs = "https://gsi-cyberjapan.github.io/optimal_bvmap/glyphs/{fontstack}/{range}.pbf"
 layers {
-  new {
-    id = "background"
-    type = "background"
-    paint {
-      `background-color` = "rgb(242,243,240)"
-    }
-  }
-  new {
+  import("layers/background.pkl")
+  new (fill) {
     id = "park"
-    type = "fill"
-    source = "openmaptiles"
     `source-layer` = "park"
     filter {
       "=="
       "$type"
       "Polygon"
     }
-    layout {
-      visibility = "visible"
-    }
     paint {
       `fill-color` = "rgb(230, 233, 229)"
     }
   }
-  new {
+  new (fill) {
     id = "water"
-    type = "fill"
-    source = "openmaptiles"
     `source-layer` = "water"
     filter {
       "all"
@@ -54,18 +45,13 @@ layers {
         "tunnel"
       }
     }
-    layout {
-      visibility = "visible"
-    }
     paint {
       `fill-antialias` = true
       `fill-color` = "rgb(194, 200, 202)"
     }
   }
-  new {
+  new (fill) {
     id = "landcover_ice_shelf"
-    type = "fill"
-    source = "openmaptiles"
     `source-layer` = "landcover"
     maxzoom = 8
     filter {
@@ -81,18 +67,13 @@ layers {
         "ice_shelf"
       }
     }
-    layout {
-      visibility = "visible"
-    }
     paint {
       `fill-color` = "hsl(0, 0%, 98%)"
       `fill-opacity` = 0.7
     }
   }
-  new {
+  new (fill) {
     id = "landcover_glacier"
-    type = "fill"
-    source = "openmaptiles"
     `source-layer` = "landcover"
     maxzoom = 8
     filter {
@@ -107,9 +88,6 @@ layers {
         "subclass"
         "glacier"
       }
-    }
-    layout {
-      visibility = "visible"
     }
     paint {
       `fill-color` = "hsl(0, 0%, 98%)"
@@ -147,9 +125,6 @@ layers {
         "residential"
       }
     }
-    layout {
-      visibility = "visible"
-    }
     paint {
       `fill-color` = "rgb(234, 234, 230)"
       `fill-opacity` {
@@ -186,9 +161,6 @@ layers {
         "wood"
       }
     }
-    layout {
-      visibility = "visible"
-    }
     paint {
       `fill-color` = "rgb(220,224,220)"
       `fill-opacity` {
@@ -216,17 +188,12 @@ layers {
       "$type"
       "LineString"
     }
-    layout {
-      visibility = "visible"
-    }
     paint {
       `line-color` = "hsl(195, 17%, 78%)"
     }
   }
-  new {
+  new (symbol) {
     id = "water_name"
-    type = "symbol"
-    source = "openmaptiles"
     `source-layer` = "water_name"
     filter {
       "=="
@@ -240,10 +207,6 @@ layers {
         {name:latin}
         {name:nonlatin}
         """
-      `text-font` {
-        "Metropolis Regular"
-        "Noto Sans Regular"
-      }
       `text-rotation-alignment` = "map"
       `text-size` = 12
     }
@@ -269,9 +232,6 @@ layers {
   new {
     id = "tunnel_motorway_casing"
     type = "line"
-    metadata {
-      `mapbox:group` = "b6371a3f2f5a9932464fa3867530a2e5"
-    }
     source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 6
@@ -299,7 +259,6 @@ layers {
     layout {
       `line-cap` = "butt"
       `line-join` = "miter"
-      visibility = "visible"
     }
     paint {
       `line-color` = "rgb(213, 213, 213)"
@@ -326,9 +285,6 @@ layers {
   new {
     id = "tunnel_motorway_inner"
     type = "line"
-    metadata {
-      `mapbox:group` = "b6371a3f2f5a9932464fa3867530a2e5"
-    }
     source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 6
@@ -356,7 +312,6 @@ layers {
     layout {
       `line-cap` = "round"
       `line-join` = "round"
-      visibility = "visible"
     }
     paint {
       `line-color` = "rgb(234,234,234)"
@@ -382,9 +337,6 @@ layers {
   new {
     id = "aeroway-taxiway"
     type = "line"
-    metadata {
-      `mapbox:group` = "1444849345966.4436"
-    }
     source = "openmaptiles"
     `source-layer` = "aeroway"
     minzoom = 12
@@ -399,7 +351,6 @@ layers {
     layout {
       `line-cap` = "round"
       `line-join` = "round"
-      visibility = "visible"
     }
     paint {
       `line-color` = "hsl(0, 0%, 88%)"
@@ -422,9 +373,6 @@ layers {
   new {
     id = "aeroway-runway-casing"
     type = "line"
-    metadata {
-      `mapbox:group` = "1444849345966.4436"
-    }
     source = "openmaptiles"
     `source-layer` = "aeroway"
     minzoom = 11
@@ -439,7 +387,6 @@ layers {
     layout {
       `line-cap` = "round"
       `line-join` = "round"
-      visibility = "visible"
     }
     paint {
       `line-color` = "hsl(0, 0%, 88%)"
@@ -462,9 +409,6 @@ layers {
   new {
     id = "aeroway-area"
     type = "fill"
-    metadata {
-      `mapbox:group` = "1444849345966.4436"
-    }
     source = "openmaptiles"
     `source-layer` = "aeroway"
     minzoom = 4
@@ -481,9 +425,6 @@ layers {
         "runway"
         "taxiway"
       }
-    }
-    layout {
-      visibility = "visible"
     }
     paint {
       `fill-color` = "rgba(255, 255, 255, 1)"
@@ -505,9 +446,6 @@ layers {
   new {
     id = "aeroway-runway"
     type = "line"
-    metadata {
-      `mapbox:group` = "1444849345966.4436"
-    }
     source = "openmaptiles"
     `source-layer` = "aeroway"
     minzoom = 11
@@ -527,7 +465,6 @@ layers {
     layout {
       `line-cap` = "round"
       `line-join` = "round"
-      visibility = "visible"
     }
     paint {
       `line-color` = "rgba(255, 255, 255, 1)"
@@ -550,7 +487,6 @@ layers {
   new {
     id = "road_area_pier"
     type = "fill"
-    metadata {}
     source = "openmaptiles"
     `source-layer` = "transportation"
     filter {
@@ -566,9 +502,6 @@ layers {
         "pier"
       }
     }
-    layout {
-      visibility = "visible"
-    }
     paint {
       `fill-antialias` = true
       `fill-color` = "rgb(242,243,240)"
@@ -577,7 +510,6 @@ layers {
   new {
     id = "road_pier"
     type = "line"
-    metadata {}
     source = "openmaptiles"
     `source-layer` = "transportation"
     filter {
@@ -617,9 +549,6 @@ layers {
   new {
     id = "highway_path"
     type = "line"
-    metadata {
-      `mapbox:group` = "b6371a3f2f5a9932464fa3867530a2e5"
-    }
     source = "openmaptiles"
     `source-layer` = "transportation"
     filter {
@@ -638,7 +567,6 @@ layers {
     layout {
       `line-cap` = "round"
       `line-join` = "round"
-      visibility = "visible"
     }
     paint {
       `line-color` = "rgb(234, 234, 234)"
@@ -661,9 +589,6 @@ layers {
   new {
     id = "highway_minor"
     type = "line"
-    metadata {
-      `mapbox:group` = "b6371a3f2f5a9932464fa3867530a2e5"
-    }
     source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 8
@@ -685,7 +610,6 @@ layers {
     layout {
       `line-cap` = "round"
       `line-join` = "round"
-      visibility = "visible"
     }
     paint {
       `line-color` = "hsl(0, 0%, 88%)"
@@ -708,9 +632,6 @@ layers {
   new {
     id = "highway_major_casing"
     type = "line"
-    metadata {
-      `mapbox:group` = "b6371a3f2f5a9932464fa3867530a2e5"
-    }
     source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 11
@@ -733,7 +654,6 @@ layers {
     layout {
       `line-cap` = "butt"
       `line-join` = "miter"
-      visibility = "visible"
     }
     paint {
       `line-color` = "rgb(213, 213, 213)"
@@ -759,9 +679,6 @@ layers {
   new {
     id = "highway_major_inner"
     type = "line"
-    metadata {
-      `mapbox:group` = "b6371a3f2f5a9932464fa3867530a2e5"
-    }
     source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 11
@@ -784,7 +701,6 @@ layers {
     layout {
       `line-cap` = "round"
       `line-join` = "round"
-      visibility = "visible"
     }
     paint {
       `line-color` = "#fff"
@@ -806,9 +722,6 @@ layers {
   new {
     id = "highway_major_subtle"
     type = "line"
-    metadata {
-      `mapbox:group` = "b6371a3f2f5a9932464fa3867530a2e5"
-    }
     source = "openmaptiles"
     `source-layer` = "transportation"
     maxzoom = 11
@@ -831,7 +744,6 @@ layers {
     layout {
       `line-cap` = "round"
       `line-join` = "round"
-      visibility = "visible"
     }
     paint {
       `line-color` = "hsla(0, 0%, 85%, 0.69)"
@@ -841,9 +753,6 @@ layers {
   new {
     id = "highway_motorway_casing"
     type = "line"
-    metadata {
-      `mapbox:group` = "b6371a3f2f5a9932464fa3867530a2e5"
-    }
     source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 6
@@ -872,7 +781,6 @@ layers {
     layout {
       `line-cap` = "butt"
       `line-join` = "miter"
-      visibility = "visible"
     }
     paint {
       `line-color` = "rgb(213, 213, 213)"
@@ -903,9 +811,6 @@ layers {
   new {
     id = "highway_motorway_inner"
     type = "line"
-    metadata {
-      `mapbox:group` = "b6371a3f2f5a9932464fa3867530a2e5"
-    }
     source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 6
@@ -934,7 +839,6 @@ layers {
     layout {
       `line-cap` = "round"
       `line-join` = "round"
-      visibility = "visible"
     }
     paint {
       `line-color` {
@@ -972,9 +876,6 @@ layers {
   new {
     id = "highway_motorway_subtle"
     type = "line"
-    metadata {
-      `mapbox:group` = "b6371a3f2f5a9932464fa3867530a2e5"
-    }
     source = "openmaptiles"
     `source-layer` = "transportation"
     maxzoom = 6
@@ -994,7 +895,6 @@ layers {
     layout {
       `line-cap` = "round"
       `line-join` = "round"
-      visibility = "visible"
     }
     paint {
       `line-color` = "hsla(0, 0%, 85%, 0.53)"
@@ -1016,9 +916,6 @@ layers {
   new {
     id = "railway_transit"
     type = "line"
-    metadata {
-      `mapbox:group` = "b6371a3f2f5a9932464fa3867530a2e5"
-    }
     source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 16
@@ -1045,7 +942,6 @@ layers {
     }
     layout {
       `line-join` = "round"
-      visibility = "visible"
     }
     paint {
       `line-color` = "#dddddd"
@@ -1055,9 +951,6 @@ layers {
   new {
     id = "railway_transit_dashline"
     type = "line"
-    metadata {
-      `mapbox:group` = "b6371a3f2f5a9932464fa3867530a2e5"
-    }
     source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 16
@@ -1084,7 +977,6 @@ layers {
     }
     layout {
       `line-join` = "round"
-      visibility = "visible"
     }
     paint {
       `line-color` = "#fafafa"
@@ -1098,9 +990,6 @@ layers {
   new {
     id = "railway_service"
     type = "line"
-    metadata {
-      `mapbox:group` = "b6371a3f2f5a9932464fa3867530a2e5"
-    }
     source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 16
@@ -1126,7 +1015,6 @@ layers {
     }
     layout {
       `line-join` = "round"
-      visibility = "visible"
     }
     paint {
       `line-color` = "#dddddd"
@@ -1136,9 +1024,6 @@ layers {
   new {
     id = "railway_service_dashline"
     type = "line"
-    metadata {
-      `mapbox:group` = "b6371a3f2f5a9932464fa3867530a2e5"
-    }
     source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 16
@@ -1161,7 +1046,6 @@ layers {
     }
     layout {
       `line-join` = "round"
-      visibility = "visible"
     }
     paint {
       `line-color` = "#fafafa"
@@ -1175,9 +1059,6 @@ layers {
   new {
     id = "railway"
     type = "line"
-    metadata {
-      `mapbox:group` = "b6371a3f2f5a9932464fa3867530a2e5"
-    }
     source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 13
@@ -1203,7 +1084,6 @@ layers {
     }
     layout {
       `line-join` = "round"
-      visibility = "visible"
     }
     paint {
       `line-color` = "#dddddd"
@@ -1225,9 +1105,6 @@ layers {
   new {
     id = "railway_dashline"
     type = "line"
-    metadata {
-      `mapbox:group` = "b6371a3f2f5a9932464fa3867530a2e5"
-    }
     source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 13
@@ -1253,7 +1130,6 @@ layers {
     }
     layout {
       `line-join` = "round"
-      visibility = "visible"
     }
     paint {
       `line-color` = "#fafafa"
@@ -1279,9 +1155,6 @@ layers {
   new {
     id = "highway_motorway_bridge_casing"
     type = "line"
-    metadata {
-      `mapbox:group` = "b6371a3f2f5a9932464fa3867530a2e5"
-    }
     source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 6
@@ -1309,7 +1182,6 @@ layers {
     layout {
       `line-cap` = "butt"
       `line-join` = "miter"
-      visibility = "visible"
     }
     paint {
       `line-color` = "rgb(213, 213, 213)"
@@ -1340,9 +1212,6 @@ layers {
   new {
     id = "highway_motorway_bridge_inner"
     type = "line"
-    metadata {
-      `mapbox:group` = "b6371a3f2f5a9932464fa3867530a2e5"
-    }
     source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 6
@@ -1370,7 +1239,6 @@ layers {
     layout {
       `line-cap` = "round"
       `line-join` = "round"
-      visibility = "visible"
     }
     paint {
       `line-color` {
@@ -1405,13 +1273,8 @@ layers {
       }
     }
   }
-  new {
+  new (symbol) {
     id = "highway_name_other"
-    type = "symbol"
-    metadata {
-      `mapbox:group` = "b6371a3f2f5a9932464fa3867530a2e5"
-    }
-    source = "openmaptiles"
     `source-layer` = "transportation_name"
     filter {
       "all"
@@ -1430,16 +1293,11 @@ layers {
       `symbol-placement` = "line"
       `symbol-spacing` = 350
       `text-field` = "{name:latin} {name:nonlatin}"
-      `text-font` {
-        "Metropolis Regular"
-        "Noto Sans Regular"
-      }
       `text-max-angle` = 30
       `text-pitch-alignment` = "viewport"
       `text-rotation-alignment` = "map"
       `text-size` = 10
       `text-transform` = "uppercase"
-      visibility = "visible"
     }
     paint {
       `text-color` = "#bbb"
@@ -1452,13 +1310,8 @@ layers {
       }
     }
   }
-  new {
+  new (symbol) {
     id = "highway_name_motorway"
-    type = "symbol"
-    metadata {
-      `mapbox:group` = "b6371a3f2f5a9932464fa3867530a2e5"
-    }
-    source = "openmaptiles"
     `source-layer` = "transportation_name"
     filter {
       "all"
@@ -1477,14 +1330,9 @@ layers {
       `symbol-placement` = "line"
       `symbol-spacing` = 350
       `text-field` = "{ref}"
-      `text-font` {
-        "Metropolis Light"
-        "Noto Sans Regular"
-      }
       `text-pitch-alignment` = "viewport"
       `text-rotation-alignment` = "viewport"
       `text-size` = 10
-      visibility = "visible"
     }
     paint {
       `text-color` = "rgb(117, 129, 145)"
@@ -1500,9 +1348,6 @@ layers {
   new {
     id = "boundary_state"
     type = "line"
-    metadata {
-      `mapbox:group` = "a14c9607bc7954ba1df7205bf660433f"
-    }
     source = "openmaptiles"
     `source-layer` = "boundary"
     filter {
@@ -1513,7 +1358,6 @@ layers {
     layout {
       `line-cap` = "round"
       `line-join` = "round"
-      visibility = "visible"
     }
     paint {
       `line-blur` = 0.4
@@ -1541,9 +1385,6 @@ layers {
   new {
     id = "boundary_country_z0-4"
     type = "line"
-    metadata {
-      `mapbox:group` = "a14c9607bc7954ba1df7205bf660433f"
-    }
     source = "openmaptiles"
     `source-layer` = "boundary"
     maxzoom = 5
@@ -1602,9 +1443,6 @@ layers {
   new {
     id = "boundary_country_z5-"
     type = "line"
-    metadata {
-      `mapbox:group` = "a14c9607bc7954ba1df7205bf660433f"
-    }
     source = "openmaptiles"
     `source-layer` = "boundary"
     minzoom = 5
@@ -1648,13 +1486,8 @@ layers {
       }
     }
   }
-  new {
+  new (symbol) {
     id = "place_other"
-    type = "symbol"
-    metadata {
-      `mapbox:group` = "101da9f13b64a08fa4b6ac1168e89e5f"
-    }
-    source = "openmaptiles"
     `source-layer` = "place"
     maxzoom = 14
     filter {
@@ -1679,10 +1512,6 @@ layers {
         {name:latin}
         {name:nonlatin}
         """
-      `text-font` {
-        "Metropolis Regular"
-        "Noto Sans Regular"
-      }
       `text-justify` = "center"
       `text-offset` {
         0.5
@@ -1690,7 +1519,6 @@ layers {
       }
       `text-size` = 10
       `text-transform` = "uppercase"
-      visibility = "visible"
     }
     paint {
       `text-color` = "rgb(117, 129, 145)"
@@ -1699,13 +1527,8 @@ layers {
       `text-halo-width` = 1
     }
   }
-  new {
+  new (symbol) {
     id = "place_suburb"
-    type = "symbol"
-    metadata {
-      `mapbox:group` = "101da9f13b64a08fa4b6ac1168e89e5f"
-    }
-    source = "openmaptiles"
     `source-layer` = "place"
     maxzoom = 15
     filter {
@@ -1727,10 +1550,6 @@ layers {
         {name:latin}
         {name:nonlatin}
         """
-      `text-font` {
-        "Metropolis Regular"
-        "Noto Sans Regular"
-      }
       `text-justify` = "center"
       `text-offset` {
         0.5
@@ -1738,7 +1557,6 @@ layers {
       }
       `text-size` = 10
       `text-transform` = "uppercase"
-      visibility = "visible"
     }
     paint {
       `text-color` = "rgb(117, 129, 145)"
@@ -1747,13 +1565,8 @@ layers {
       `text-halo-width` = 1
     }
   }
-  new {
+  new (symbol) {
     id = "place_village"
-    type = "symbol"
-    metadata {
-      `mapbox:group` = "101da9f13b64a08fa4b6ac1168e89e5f"
-    }
-    source = "openmaptiles"
     `source-layer` = "place"
     maxzoom = 14
     filter {
@@ -1776,10 +1589,6 @@ layers {
         {name:latin}
         {name:nonlatin}
         """
-      `text-font` {
-        "Metropolis Regular"
-        "Noto Sans Regular"
-      }
       `text-justify` = "left"
       `text-offset` {
         0.5
@@ -1787,7 +1596,6 @@ layers {
       }
       `text-size` = 10
       `text-transform` = "uppercase"
-      visibility = "visible"
     }
     paint {
       `icon-opacity` = 0.7
@@ -1797,13 +1605,9 @@ layers {
       `text-halo-width` = 1
     }
   }
-  new {
+  new (symbol) {
     id = "place_town"
     type = "symbol"
-    metadata {
-      `mapbox:group` = "101da9f13b64a08fa4b6ac1168e89e5f"
-    }
-    source = "openmaptiles"
     `source-layer` = "place"
     maxzoom = 15
     filter {
@@ -1851,10 +1655,6 @@ layers {
         {name:latin}
         {name:nonlatin}
         """
-      `text-font` {
-        "Metropolis Regular"
-        "Noto Sans Regular"
-      }
       `text-justify` = "left"
       `text-offset` {
         0.5
@@ -1862,7 +1662,6 @@ layers {
       }
       `text-size` = 10
       `text-transform` = "uppercase"
-      visibility = "visible"
     }
     paint {
       `icon-opacity` = 0.7
@@ -1872,13 +1671,8 @@ layers {
       `text-halo-width` = 1
     }
   }
-  new {
+  new (symbol) {
     id = "place_city"
-    type = "symbol"
-    metadata {
-      `mapbox:group` = "101da9f13b64a08fa4b6ac1168e89e5f"
-    }
-    source = "openmaptiles"
     `source-layer` = "place"
     maxzoom = 14
     filter {
@@ -1939,10 +1733,6 @@ layers {
         {name:latin}
         {name:nonlatin}
         """
-      `text-font` {
-        "Metropolis Regular"
-        "Noto Sans Regular"
-      }
       `text-justify` = "left"
       `text-offset` {
         0.5
@@ -1950,7 +1740,6 @@ layers {
       }
       `text-size` = 10
       `text-transform` = "uppercase"
-      visibility = "visible"
     }
     paint {
       `icon-opacity` = 0.7
@@ -1960,13 +1749,8 @@ layers {
       `text-halo-width` = 1
     }
   }
-  new {
+  new (symbol) {
     id = "place_capital"
-    type = "symbol"
-    metadata {
-      `mapbox:group` = "101da9f13b64a08fa4b6ac1168e89e5f"
-    }
-    source = "openmaptiles"
     `source-layer` = "place"
     maxzoom = 12
     filter {
@@ -2022,10 +1806,6 @@ layers {
         {name:latin}
         {name:nonlatin}
         """
-      `text-font` {
-        "Metropolis Regular"
-        "Noto Sans Regular"
-      }
       `text-justify` = "left"
       `text-offset` {
         0.5
@@ -2033,7 +1813,6 @@ layers {
       }
       `text-size` = 14
       `text-transform` = "uppercase"
-      visibility = "visible"
     }
     paint {
       `icon-opacity` = 0.7
@@ -2043,13 +1822,8 @@ layers {
       `text-halo-width` = 1
     }
   }
-  new {
+  new (symbol) {
     id = "place_city_large"
-    type = "symbol"
-    metadata {
-      `mapbox:group` = "101da9f13b64a08fa4b6ac1168e89e5f"
-    }
-    source = "openmaptiles"
     `source-layer` = "place"
     maxzoom = 12
     filter {
@@ -2110,10 +1884,6 @@ layers {
         {name:latin}
         {name:nonlatin}
         """
-      `text-font` {
-        "Metropolis Regular"
-        "Noto Sans Regular"
-      }
       `text-justify` = "left"
       `text-offset` {
         0.5
@@ -2121,7 +1891,6 @@ layers {
       }
       `text-size` = 14
       `text-transform` = "uppercase"
-      visibility = "visible"
     }
     paint {
       `icon-opacity` = 0.7
@@ -2131,13 +1900,8 @@ layers {
       `text-halo-width` = 1
     }
   }
-  new {
+  new (symbol) {
     id = "place_state"
-    type = "symbol"
-    metadata {
-      `mapbox:group` = "101da9f13b64a08fa4b6ac1168e89e5f"
-    }
-    source = "openmaptiles"
     `source-layer` = "place"
     maxzoom = 12
     filter {
@@ -2158,13 +1922,8 @@ layers {
         {name:latin}
         {name:nonlatin}
         """
-      `text-font` {
-        "Metropolis Regular"
-        "Noto Sans Regular"
-      }
       `text-size` = 10
       `text-transform` = "uppercase"
-      visibility = "visible"
     }
     paint {
       `text-color` = "rgb(113, 129, 144)"
@@ -2173,13 +1932,8 @@ layers {
       `text-halo-width` = 1
     }
   }
-  new {
+  new (symbol) {
     id = "place_country_other"
-    type = "symbol"
-    metadata {
-      `mapbox:group` = "101da9f13b64a08fa4b6ac1168e89e5f"
-    }
-    source = "openmaptiles"
     `source-layer` = "place"
     maxzoom = 8
     filter {
@@ -2201,10 +1955,6 @@ layers {
     }
     layout {
       `text-field` = "{name:latin}"
-      `text-font` {
-        "Metropolis Light Italic"
-        "Noto Sans Italic"
-      }
       `text-size` {
         base = 1
         stops {
@@ -2219,7 +1969,6 @@ layers {
         }
       }
       `text-transform` = "uppercase"
-      visibility = "visible"
     }
     paint {
       `text-color` {
@@ -2239,13 +1988,8 @@ layers {
       `text-halo-width` = 1.4
     }
   }
-  new {
+  new (symbol) {
     id = "place_country_minor"
-    type = "symbol"
-    metadata {
-      `mapbox:group` = "101da9f13b64a08fa4b6ac1168e89e5f"
-    }
-    source = "openmaptiles"
     `source-layer` = "place"
     maxzoom = 8
     filter {
@@ -2272,10 +2016,6 @@ layers {
     }
     layout {
       `text-field` = "{name:latin}"
-      `text-font` {
-        "Metropolis Regular"
-        "Noto Sans Regular"
-      }
       `text-size` {
         base = 1
         stops {
@@ -2290,7 +2030,6 @@ layers {
         }
       }
       `text-transform` = "uppercase"
-      visibility = "visible"
     }
     paint {
       `text-color` {
@@ -2310,13 +2049,8 @@ layers {
       `text-halo-width` = 1.4
     }
   }
-  new {
+  new (symbol) {
     id = "place_country_major"
-    type = "symbol"
-    metadata {
-      `mapbox:group` = "101da9f13b64a08fa4b6ac1168e89e5f"
-    }
-    source = "openmaptiles"
     `source-layer` = "place"
     maxzoom = 6
     filter {
@@ -2344,10 +2078,6 @@ layers {
     layout {
       `text-anchor` = "center"
       `text-field` = "{name:latin}"
-      `text-font` {
-        "Metropolis Regular"
-        "Noto Sans Regular"
-      }
       `text-size` {
         base = 1.4
         stops {
@@ -2366,7 +2096,6 @@ layers {
         }
       }
       `text-transform` = "uppercase"
-      visibility = "visible"
     }
     paint {
       `text-color` {

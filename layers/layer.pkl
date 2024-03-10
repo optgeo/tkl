@@ -1,0 +1,10 @@
+open module layer
+
+id = "FIXME"
+type = "FIXME"
+source = "openmaptiles"
+`source-layer` = "FIXME"
+filter { }
+paint { }
+layout { }
+maxzoom = 22
