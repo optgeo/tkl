@@ -17,7 +17,7 @@
 import {define} from "./_observablehq/client.js";
 import {registerFile} from "./_observablehq/stdlib.js";
 
-registerFile("./data/style.json", {"name":"./data/style.json","mimeType":"application/json","path":"./_file/data/style.20fbbfa6.json"});
+registerFile("./data/style.json", {"name":"./data/style.json","mimeType":"application/json","path":"./_file/data/style.55387e3a.json"});
 registerFile("./data/tkl.pmtiles", {"name":"./data/tkl.pmtiles","path":"./_file/data/tkl.a11450e1.pmtiles"});
 
 define({id: "8c2b099f", inputs: ["html","display"], body: async (html,display) => {
@@ -26,7 +26,7 @@ html.fragment`<link href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.css" re
 ))
 }});
 
-define({id: "935c81da", inputs: ["display","FileAttachment","invalidation"], outputs: ["maplibregl","pmtiles","div","url","style","map"], body: async (display,FileAttachment,invalidation) => {
+define({id: "d6daeb4a", inputs: ["display","FileAttachment","invalidation"], outputs: ["maplibregl","pmtiles","div","url","style","map"], body: async (display,FileAttachment,invalidation) => {
 const {default: maplibregl} = await import("./_npm/maplibre-gl@4.1.0/+esm.js");
 let pmtiles = await import("https://cdn.skypack.dev/pmtiles")
 maplibregl.addProtocol('pmtiles', (new pmtiles.Protocol()).tile)
@@ -39,12 +39,13 @@ div.style = "height: 600px;"
 const url = await FileAttachment('data/tkl.pmtiles').url()
 const style = await FileAttachment('data/style.json').json()
 style.sources.openmaptiles.tiles[0] = "pmtiles://" + url + "/{z}/{x}/{y}"
-
+display(style)
 const map = new maplibregl.Map({
   container: div,
   style: style,
   center: [139.755, 35.691],
-  zoom: 15
+  zoom: 15,
+  localIdeographFontFamily: '"NotoSansJP-Regular", sans-serif'
 })
 map.addControl(new maplibregl.FullscreenControl())
 map.addControl(new maplibregl.NavigationControl())
@@ -58,9 +59,9 @@ return {maplibregl,pmtiles,div,url,style,map};
 <main id="observablehq-main" class="observablehq">
 <h1 id="hello%2C-tokyo-local" tabindex="-1"><a class="observablehq-header-anchor" href="#hello%2C-tokyo-local">Hello, Tokyo Local</a></h1>
 <div id="cell-8c2b099f" class="observablehq observablehq--block observablehq--loading"></div>
-<div id="cell-935c81da" class="observablehq observablehq--block"></div>
+<div id="cell-d6daeb4a" class="observablehq observablehq--block"></div>
 </main>
 <footer id="observablehq-footer">
-<div>Built with <a href="https://observablehq.com/" target="_blank">Observable</a> on <a title="2024-03-10T14:19:15">Mar 10, 2024</a>.</div>
+<div>Built with <a href="https://observablehq.com/" target="_blank">Observable</a> on <a title="2024-03-10T20:49:15">Mar 10, 2024</a>.</div>
 </footer>
 </div>
