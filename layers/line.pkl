@@ -1,0 +1,4 @@
+open module line
+extends "layer.pkl"
+
+type = "line"

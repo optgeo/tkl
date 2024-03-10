@@ -1,6 +1,7 @@
 import "layers/layer.pkl"
 import "layers/symbol.pkl"
 import "layers/fill.pkl"
+import "layers/line.pkl"
 
 version = 8
 sources {
@@ -106,10 +107,8 @@ layers {
       }
     }
   }
-  new {
+  new (fill) {
     id = "landuse_residential"
-    type = "fill"
-    source = "openmaptiles"
     `source-layer` = "landuse"
     maxzoom = 16
     filter {
@@ -142,10 +141,8 @@ layers {
       }
     }
   }
-  new {
+  new (fill) {
     id = "landcover_wood"
-    type = "fill"
-    source = "openmaptiles"
     `source-layer` = "landcover"
     minzoom = 10
     filter {
@@ -178,10 +175,8 @@ layers {
       }
     }
   }
-  new {
+  new (line) {
     id = "waterway"
-    type = "line"
-    source = "openmaptiles"
     `source-layer` = "waterway"
     filter {
       "=="
@@ -217,10 +212,8 @@ layers {
       `text-halo-width` = 1
     }
   }
-  new {
+  new (fill) {
     id = "building"
-    type = "fill"
-    source = "openmaptiles"
     `source-layer` = "building"
     minzoom = 12
     paint {
@@ -229,10 +222,8 @@ layers {
       `fill-outline-color` = "rgb(219, 219, 218)"
     }
   }
-  new {
+  new (line) {
     id = "tunnel_motorway_casing"
-    type = "line"
-    source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 6
     filter {
@@ -282,10 +273,8 @@ layers {
       }
     }
   }
-  new {
+  new (line) {
     id = "tunnel_motorway_inner"
-    type = "line"
-    source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 6
     filter {
@@ -334,10 +323,8 @@ layers {
       }
     }
   }
-  new {
+  new (line) {
     id = "aeroway-taxiway"
-    type = "line"
-    source = "openmaptiles"
     `source-layer` = "aeroway"
     minzoom = 12
     filter {
@@ -370,10 +357,8 @@ layers {
       }
     }
   }
-  new {
+  new (line) {
     id = "aeroway-runway-casing"
-    type = "line"
-    source = "openmaptiles"
     `source-layer` = "aeroway"
     minzoom = 11
     filter {
@@ -406,10 +391,8 @@ layers {
       }
     }
   }
-  new {
+  new (fill) {
     id = "aeroway-area"
-    type = "fill"
-    source = "openmaptiles"
     `source-layer` = "aeroway"
     minzoom = 4
     filter {
@@ -443,10 +426,8 @@ layers {
       }
     }
   }
-  new {
+  new (line) {
     id = "aeroway-runway"
-    type = "line"
-    source = "openmaptiles"
     `source-layer` = "aeroway"
     minzoom = 11
     filter {
@@ -484,10 +465,8 @@ layers {
       }
     }
   }
-  new {
+  new (fill) {
     id = "road_area_pier"
-    type = "fill"
-    source = "openmaptiles"
     `source-layer` = "transportation"
     filter {
       "all"
@@ -507,10 +486,8 @@ layers {
       `fill-color` = "rgb(242,243,240)"
     }
   }
-  new {
+  new (line) {
     id = "road_pier"
-    type = "line"
-    source = "openmaptiles"
     `source-layer` = "transportation"
     filter {
       "all"
@@ -546,10 +523,8 @@ layers {
       }
     }
   }
-  new {
+  new (line) {
     id = "highway_path"
-    type = "line"
-    source = "openmaptiles"
     `source-layer` = "transportation"
     filter {
       "all"
@@ -586,10 +561,8 @@ layers {
       }
     }
   }
-  new {
+  new (line) {
     id = "highway_minor"
-    type = "line"
-    source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 8
     filter {
@@ -629,10 +602,8 @@ layers {
       }
     }
   }
-  new {
+  new (line) {
     id = "highway_major_casing"
-    type = "line"
-    source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 11
     filter {
@@ -676,10 +647,8 @@ layers {
       }
     }
   }
-  new {
+  new (line) {
     id = "highway_major_inner"
-    type = "line"
-    source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 11
     filter {
@@ -719,10 +688,8 @@ layers {
       }
     }
   }
-  new {
+  new (line) {
     id = "highway_major_subtle"
-    type = "line"
-    source = "openmaptiles"
     `source-layer` = "transportation"
     maxzoom = 11
     filter {
@@ -750,10 +717,8 @@ layers {
       `line-width` = 2
     }
   }
-  new {
+  new (line) {
     id = "highway_motorway_casing"
-    type = "line"
-    source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 6
     filter {
@@ -808,10 +773,8 @@ layers {
       }
     }
   }
-  new {
+  new (line) {
     id = "highway_motorway_inner"
-    type = "line"
-    source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 6
     filter {
@@ -873,10 +836,8 @@ layers {
       }
     }
   }
-  new {
+  new (line) {
     id = "highway_motorway_subtle"
-    type = "line"
-    source = "openmaptiles"
     `source-layer` = "transportation"
     maxzoom = 6
     filter {
@@ -913,10 +874,8 @@ layers {
       }
     }
   }
-  new {
+  new (line) {
     id = "railway_transit"
-    type = "line"
-    source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 16
     filter {
@@ -948,10 +907,8 @@ layers {
       `line-width` = 3
     }
   }
-  new {
+  new (line) {
     id = "railway_transit_dashline"
-    type = "line"
-    source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 16
     filter {
@@ -987,10 +944,8 @@ layers {
       `line-width` = 2
     }
   }
-  new {
+  new (line) {
     id = "railway_service"
-    type = "line"
-    source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 16
     filter {
@@ -1021,10 +976,8 @@ layers {
       `line-width` = 3
     }
   }
-  new {
+  new (line) {
     id = "railway_service_dashline"
-    type = "line"
-    source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 16
     filter {
@@ -1056,10 +1009,8 @@ layers {
       `line-width` = 2
     }
   }
-  new {
+  new (line) {
     id = "railway"
-    type = "line"
-    source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 13
     filter {
@@ -1102,10 +1053,8 @@ layers {
       }
     }
   }
-  new {
+  new (line) {
     id = "railway_dashline"
-    type = "line"
-    source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 13
     filter {
@@ -1152,10 +1101,8 @@ layers {
       }
     }
   }
-  new {
+  new (line) {
     id = "highway_motorway_bridge_casing"
-    type = "line"
-    source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 6
     filter {
@@ -1209,10 +1156,8 @@ layers {
       }
     }
   }
-  new {
+  new (line) {
     id = "highway_motorway_bridge_inner"
-    type = "line"
-    source = "openmaptiles"
     `source-layer` = "transportation"
     minzoom = 6
     filter {
@@ -1345,10 +1290,8 @@ layers {
       }
     }
   }
-  new {
+  new (line) {
     id = "boundary_state"
-    type = "line"
-    source = "openmaptiles"
     `source-layer` = "boundary"
     filter {
       "=="
@@ -1382,10 +1325,8 @@ layers {
       }
     }
   }
-  new {
+  new (line) {
     id = "boundary_country_z0-4"
-    type = "line"
-    source = "openmaptiles"
     `source-layer` = "boundary"
     maxzoom = 5
     filter {
@@ -1440,10 +1381,8 @@ layers {
       }
     }
   }
-  new {
+  new (line) {
     id = "boundary_country_z5-"
-    type = "line"
-    source = "openmaptiles"
     `source-layer` = "boundary"
     minzoom = 5
     filter {
