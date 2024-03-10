@@ -1,5 +1,6 @@
 pages:
 	npm run build
+	touch dist/.nojekyll
 	git subtree push --prefix dist origin gh-pages
 #positron:
 #	pkl eval get-positron.pkl > positron.pkl
