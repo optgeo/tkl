@@ -1,0 +1,7 @@
+import "pkl:json"
+file = read("https://openmaptiles.github.io/positron-gl-style/style-cdn.json")
+parsed = new json.Parser {}.parse(file)
+output {
+  value = parsed
+}
+
