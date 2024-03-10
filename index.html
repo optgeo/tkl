@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Hello, Tokyo Local | Tokyo Local</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-air,near-midnight.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-air,near-midnight.css">
+<link rel="modulepreload" href="./_observablehq/client.js">
+<link rel="modulepreload" href="./_observablehq/runtime.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.js">
+<link rel="modulepreload" href="./_npm/maplibre-gl@4.1.0/+esm.js">
+<link rel="modulepreload" href="./_npm/htl@0.3.1/+esm.js">
+<script type="module">
+
+import {define} from "./_observablehq/client.js";
+
+define({id: "8c2b099f", inputs: ["html","display"], body: async (html,display) => {
+display(await(
+html.fragment`<link href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.css" rel="stylesheet" />`
+))
+}});
+
+define({id: "62c404fb", inputs: ["display","invalidation"], outputs: ["maplibregl","pmtiles","div","style","map"], body: async (display,invalidation) => {
+const {default: maplibregl} = await import("./_npm/maplibre-gl@4.1.0/+esm.js");
+let pmtiles = await import("https://cdn.skypack.dev/pmtiles")
+maplibregl.addProtocol('pmtiles', (new pmtiles.Protocol()).tile)
+
+const div = display(document.createElement("div"))
+div.style = "height: 400px;"
+
+const style = "https://gsi-cyberjapan.github.io/optimal_bvmap/style/std.json"
+//const url = await FileAttachment('data/ua.pmtiles').url()
+//const style = await FileAttachment('data/style.json').json()
+//style.sources.ua.tiles[0] = "pmtiles://" + url + "/{z}/{x}/{y}"
+
+const map = new maplibregl.Map({
+  container: div,
+  style: style,
+  center: [139.755, 35.691],
+  zoom: 15
+})
+map.addControl(new maplibregl.FullscreenControl())
+map.addControl(new maplibregl.NavigationControl())
+
+invalidation.then(() => map.remove())
+return {maplibregl,pmtiles,div,style,map};
+}});
+
+</script>
+<div id="observablehq-center">
+<main id="observablehq-main" class="observablehq">
+<h1 id="hello%2C-tokyo-local" tabindex="-1"><a class="observablehq-header-anchor" href="#hello%2C-tokyo-local">Hello, Tokyo Local</a></h1>
+<div id="cell-8c2b099f" class="observablehq observablehq--block observablehq--loading"></div>
+<div id="cell-62c404fb" class="observablehq observablehq--block"></div>
+</main>
+<footer id="observablehq-footer">
+<div>Built with <a href="https://observablehq.com/" target="_blank">Observable</a> on <a title="2024-03-10T11:26:10">Mar 10, 2024</a>.</div>
+</footer>
+</div>
