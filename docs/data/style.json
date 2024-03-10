@@ -6,7 +6,8 @@
       "tiles": [
         "pmtiles://https://tile.openstreetmap.jp/static/planet.pmtiles/{z}/{x}/{y}"
       ],
-      "maxzoom": 14
+      "maxzoom": 14,
+      "attribution": "OpenStreetMap contributors"
     }
   },
   "sprite": "https://openmaptiles.github.io/positron-gl-style/sprite",
@@ -238,8 +239,8 @@
         "symbol-spacing": 500,
         "text-field": "{name:latin}\n{name:nonlatin}",
         "text-font": [
-          "Metropolis Medium Italic",
-          "Noto Sans Italic"
+          "Metropolis Regular",
+          "Noto Sans Regular"
         ],
         "text-rotation-alignment": "map",
         "text-size": 12

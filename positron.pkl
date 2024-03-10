@@ -6,6 +6,7 @@ sources {
       "pmtiles://https://tile.openstreetmap.jp/static/planet.pmtiles/{z}/{x}/{y}"
     }
     maxzoom = 14
+    attribution = "OpenStreetMap contributors"
   }
 }
 sprite = "https://openmaptiles.github.io/positron-gl-style/sprite"
@@ -240,8 +241,8 @@ layers {
         {name:nonlatin}
         """
       `text-font` {
-        "Metropolis Medium Italic"
-        "Noto Sans Italic"
+        "Metropolis Regular"
+        "Noto Sans Regular"
       }
       `text-rotation-alignment` = "map"
       `text-size` = 12
