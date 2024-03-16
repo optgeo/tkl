@@ -26,9 +26,10 @@ html.fragment`<link href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.css" re
 ))
 }});
 
-define({id: "d6daeb4a", inputs: ["display","FileAttachment","invalidation"], outputs: ["maplibregl","pmtiles","div","url","style","map"], body: async (display,FileAttachment,invalidation) => {
+define({id: "387286fb", inputs: ["display","FileAttachment","invalidation"], outputs: ["maplibregl","pmtiles","div","url","style","map"], body: async (display,FileAttachment,invalidation) => {
 const {default: maplibregl} = await import("./_npm/maplibre-gl@4.1.0/+esm.js");
-let pmtiles = await import("https://cdn.skypack.dev/pmtiles")
+// let pmtiles = await import("https://cdn.skypack.dev/pmtiles")
+let pmtiles = await import("./_npm/pmtiles@3.0.5/+esm.js")
 maplibregl.addProtocol('pmtiles', (new pmtiles.Protocol()).tile)
 
 const div = display(document.createElement("div"))
@@ -59,9 +60,9 @@ return {maplibregl,pmtiles,div,url,style,map};
 <main id="observablehq-main" class="observablehq">
 <h1 id="hello%2C-tokyo-local" tabindex="-1"><a class="observablehq-header-anchor" href="#hello%2C-tokyo-local">Hello, Tokyo Local</a></h1>
 <div id="cell-8c2b099f" class="observablehq observablehq--block observablehq--loading"></div>
-<div id="cell-d6daeb4a" class="observablehq observablehq--block"></div>
+<div id="cell-387286fb" class="observablehq observablehq--block"></div>
 </main>
 <footer id="observablehq-footer">
-<div>Built with <a href="https://observablehq.com/" target="_blank">Observable</a> on <a title="2024-03-10T22:15:43">Mar 10, 2024</a>.</div>
+<div>Built with <a href="https://observablehq.com/" target="_blank">Observable</a> on <a title="2024-03-16T20:18:16">Mar 16, 2024</a>.</div>
 </footer>
 </div>
