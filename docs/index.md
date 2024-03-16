@@ -10,7 +10,8 @@ toc: false
 
 ```js
 import maplibregl from "npm:maplibre-gl"
-let pmtiles = await import("https://cdn.skypack.dev/pmtiles")
+// let pmtiles = await import("https://cdn.skypack.dev/pmtiles")
+let pmtiles = await import("npm:pmtiles")
 maplibregl.addProtocol('pmtiles', (new pmtiles.Protocol()).tile)
 
 const div = display(document.createElement("div"))
